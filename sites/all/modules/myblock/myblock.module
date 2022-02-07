@@ -1,0 +1,22 @@
+<?php
+
+
+function myblock_block_info() {
+
+  $blocks['myblock'] = array(
+    'info' => t('My magical block'),
+  );
+  return $blocks;
+}
+
+function myblock_block_view($delta = '') {
+
+  $block = array();
+  switch ($delta) {
+    case 'myblock':
+      $block['subject'] = t('This is my magical block 👻');
+      $block['content'] = "test";
+      break;
+  }
+  return $block;
+}

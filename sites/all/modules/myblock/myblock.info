@@ -1,0 +1,5 @@
+name = "My block module"
+description = "Creates a custom block that can be used to magical things"
+core = "7.x"
+php = "7.2.x"
+version = "7.x-1.0"
