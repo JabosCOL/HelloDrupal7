@@ -1,0 +1,6 @@
+name = "Cron monitor"
+description = "Monitor and send email on cron run"
+core = "7.x"
+php = "7.2.x"
+version = "7.x-1.0"
+configure = "admin/config/cronmonitor"
