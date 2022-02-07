@@ -1,6 +1,44 @@
 <?php
 
 
+/**
+ * Implements hook_permission()
+ */
+function myblock_permission()
+{
+  return array(
+    'access mypage' => array(
+      'title' => t('Access My page'),
+      'description' => t('Access My page on my site.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu()
+ */
+function myblock_menu()
+{
+  $items['mypage'] = array(
+    'title' => 'My page',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'myblock_mypage',
+    'access arguments' => array('access mypage'),
+  );
+  return $items;
+}
+
+/**
+ * My callback function
+ */
+function myblock_mypage(){
+  return "<strong>This is a test</strong>";
+}
+
+/**
+ * Implements hook_block_info()
+ */
+
 function myblock_block_info() {
 
   $blocks['myblock'] = array(
@@ -8,6 +46,10 @@ function myblock_block_info() {
   );
   return $blocks;
 }
+
+/**
+ * Implements hook_block_view()
+ */
 
 function myblock_block_view($delta = '') {
 
