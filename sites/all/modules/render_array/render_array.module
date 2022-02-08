@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function render_array_menu() {
+  $items['page-html'] = array(
+    'title' => 'My page with HTML style function',
+    'page callback' => 'render_array_html_page',
+    'access callback' => TRUE,
+  );
+  $items['page-renderable'] = array(
+    'title' => 'My page with render array function',
+    'page callback' => 'render_array_renderable_page',
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Callback function using HTML output.
+ */
+function render_array_html_page() {
+  $output = '<p>A paragraph about some stuff...</p>';
+  $output = '<ul><li>first item</li><li>second item</li><li>third item</li></ul>';
+  return $output;
+}
+
+/**
+ * Callback function using renderable array.
+ */
+function render_array_renderable_page() {
+  $output = array(
+    'first_para' => array(
+      '#type' => 'markup',
+      '#markup' => '<p>A paragraph about some stuff...</p>',
+    ),
+    'second_para' => array(
+      '#items' => array('first item', 'second item', 'third item'),
+      '#theme' => 'item_list',
+    ),
+  );
+  return $output;
+}
