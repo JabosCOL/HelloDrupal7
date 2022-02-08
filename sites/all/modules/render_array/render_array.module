@@ -18,27 +18,53 @@ function render_array_menu() {
 }
 
 /**
+ * Implement hook_theme().
+ */
+function render_array_theme($existing, $type, $theme, $path) {
+  return array(
+    'render_array_function' => array(
+      'variables' => array(
+        'text_one' => NULL,
+        'text_two' => NULL,
+      ),
+    ),
+    'render_array_template' => array(
+      'variables' => array(
+        'text_one' => NULL,
+        'text_two' => NULL,
+      ),
+      'template' => 'render_array_template',
+    ),
+  );
+}
+
+/**
  * Callback function using HTML output.
  */
 function render_array_html_page() {
-  $output = '<p>A paragraph about some stuff...</p>';
-  $output = '<ul><li>first item</li><li>second item</li><li>third item</li></ul>';
-  return $output;
+  $text_one = "This is text one";
+  return theme('render_array_function', array('text_one' => $text_one, 'text_two' => 'Text Two!'));
 }
 
 /**
  * Callback function using renderable array.
  */
 function render_array_renderable_page() {
+  $text_one = "This is text one";
   $output = array(
-    'first_para' => array(
-      '#type' => 'markup',
-      '#markup' => '<p>A paragraph about some stuff...</p>',
-    ),
-    'second_para' => array(
-      '#items' => array('first item', 'second item', 'third item'),
-      '#theme' => 'item_list',
-    ),
+    '#theme' => 'render_array_template',
+    '#type' => 'markup',
+    '#text_one' => $text_one,
+    '#text_two' => 'Text Two',
   );
+  return $output;
+}
+
+/**
+ * Theme function example.
+ */
+function theme_render_array_function($variables) {
+  $output = "<h2>" . $variables['text_one'] . "</h2>";
+  $output .= "<p>" . $variables['text_two'] . "</p>";
   return $output;
 }
